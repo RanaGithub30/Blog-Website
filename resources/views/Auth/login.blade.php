@@ -3,6 +3,7 @@
 
 <main>
     <div class="container">
+    @include('extra.session-message')
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
@@ -18,7 +19,8 @@
                     <p class="text-center small">Enter your email & password to login</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form class="row g-3 needs-validation" action="{{ route('/login') }}" method="post">
+                    @csrf
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Email</label>

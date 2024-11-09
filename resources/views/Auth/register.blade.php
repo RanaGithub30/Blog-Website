@@ -3,6 +3,7 @@
 
 <main>
     <div class="container">
+    @include('extra.session-message')
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">

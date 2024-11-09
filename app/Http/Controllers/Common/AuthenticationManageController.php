@@ -35,4 +35,19 @@ class AuthenticationManageController extends Controller
             $res = $this->authService->registration($request->all());
             return redirect()->back()->with('success', 'You have Successfully Registered');
     }
+    
+    public function login(Request $request){
+            // $request->validate([
+            //     'email' => 'required|email|unique:users',
+            //     'password' => 'required',
+            // ]);
+
+            $res = $this->authService->login($request->all());
+            return redirect($res['redirectToPage'])->with($res['msg_type'], $res['msg']);
+    }
+
+    public function logout(){
+           $res = $this->authService->logout();
+           return redirect('/')->with('success', 'Logout Successfully');
+    }
 }
