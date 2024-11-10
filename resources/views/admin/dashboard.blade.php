@@ -45,7 +45,7 @@
 
                                     <div class="d-flex align-items-center">
                                         <div class="ps-3">
-                                            <h6>0</h6>
+                                            <h6>{{ $res['totalPosts'] }}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@
 
                                     <div class="d-flex align-items-center">
                                         <div class="ps-3">
-                                            <h6>0</h6>
+                                            <h6>{{ $res['totalComments'] }}</h6>
                                         </div>
                                     </div>
 

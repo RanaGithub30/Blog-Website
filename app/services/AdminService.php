@@ -1,14 +1,18 @@
 <?php
 
 namespace App\Services;
-use App\Models\User;
+use App\Models\{User, Post, Comment};
 
 class AdminService{
       public function dashboard(){
              $totalUsers = count(User::where('user_type', 'user')->get());
+             $totalPosts = count(Post::all());
+             $totalComments = count(Comment::all());
 
              $data = [
                 'totalUsers' => $totalUsers,
+                'totalPosts' => $totalPosts,
+                'totalComments' => $totalComments,
              ];
 
              return $data;
@@ -35,6 +39,16 @@ class AdminService{
                   'email' => $data['email'],
             ]);
 
+            return true;
+      }
+
+      public function post(){
+            $posts = Post::with(['user', 'comments', 'comments.user'])->orderBy('id', 'desc')->paginate(20);
+            return $posts;
+      }
+
+      public function post_delete($postId){
+            Post::find($postId)->delete();
             return true;
       }
 }

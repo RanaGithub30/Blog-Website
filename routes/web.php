@@ -50,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('user-delete/{userId}', 'user_delete')->name('/admin/user-delete');
                 Route::get('user-edit/{userId}', 'user_edit')->name('/admin/user-edit');
                 Route::post('user-update/{userId}', 'user_update')->name('/admin/user-update');
+
+                Route::get('post', 'post')->name('/admin/post');
+                Route::get('post-delete/{postId}', 'post_delete')->name('/admin/post-delete');
         });
 
         Route::controller(AuthenticationManageController::class)->group(function () {

@@ -46,4 +46,14 @@ class AdminManageController extends Controller
         $res = $this->adminService->user_update($request->all(), $userId);
         return redirect()->back()->with('success', 'User Updated Successfully');
     }
+
+    public function post(){
+        $posts = $this->adminService->post();
+        return view('admin.post.list', compact('posts'));
+    }
+    
+    public function post_delete($postId){
+        $posts = $this->adminService->post_delete($postId);
+        return redirect()->back()->with('success', 'Post Deleted Successfully');
+    }
 }
