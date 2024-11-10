@@ -18,7 +18,7 @@ class UserManageController extends Controller
     }
 
     public function dashboard(){
-        $res = $this->userService->dashboard();
-        return view('user.dashboard', compact('res'));
+        $posts = $this->userService->dashboard();
+        return view('user.dashboard', compact('posts'));
     }
 }

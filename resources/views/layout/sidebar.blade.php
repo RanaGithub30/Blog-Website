@@ -32,7 +32,7 @@
       @endif
 
       <li class="nav-item">
-        <a class="nav-link " href="{{ Auth::user()->user_type == 'admin' ? route('/admin/post') : route('/user/post') }}">
+        <a class="nav-link " href="{{ Auth::user()->user_type == 'admin' ? route('/admin/dashboard') : route('/user/post') }}">
           <i class="bi bi-grid"></i>
           <span>Posts</span>
         </a>

@@ -35,6 +35,13 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('post-delete/{postId}', 'post_delete')->name('/user/post-delete');
                 Route::get('post-edit/{postId}', 'post_edit')->name('/user/post-edit');
                 Route::post('post-update/{postId}', 'post_update')->name('/user/post-update');
+
+                Route::get('view-all-comments/{postId}', 'viewAllComments')->name('/user/view-all-comment');
+                Route::get('add-comments/{postId}', 'addComments')->name('/user/add-comment');
+                Route::post('save-comments/{postId}', 'saveComments')->name('/user/save-comment');
+                Route::get('edit-comment/{comment}', 'editComments')->name('/user/edit-comment');
+                Route::post('update-comments/{comment}', 'updateComments')->name('/user/update-comment');
+                Route::get('delete-comment/{commentId}', 'deleteComment')->name('/user/delete-comment');
         });
         
         Route::controller(AdminManageController::class)->prefix('/admin')->group(function () {

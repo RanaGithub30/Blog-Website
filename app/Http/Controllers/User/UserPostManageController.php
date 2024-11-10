@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\{UserPostService};
+use App\Models\{Comment};
 
 class UserPostManageController extends Controller
 {
@@ -54,5 +55,39 @@ class UserPostManageController extends Controller
 
         $posts = $this->userPostService->post_update($request->all(), $postId);
         return redirect('/user/post')->with('success', 'Post Updated Successfully');
+    }
+
+    /** Comments */
+
+    public function viewAllComments($postId){
+        $post = $this->userPostService->viewAllComments($postId);
+        return view('user.comment.view-all', compact('post'));
+    }
+   
+    public function addComments($postId){
+        return view('user.comment.add', compact('postId'));
+    }
+
+    public function saveComments(Request $request, $postId){
+        $request->validate([
+            'comment' => 'required'
+        ]);
+
+        $post = $this->userPostService->saveComments($request->all(), $postId);
+        return redirect('user/view-all-comments/'.$postId);
+    }
+
+    public function deleteComment($commentId){
+        $post = $this->userPostService->deleteComment($commentId);
+        return redirect()->back()->with('error', 'Comment Deleted Successfully');
+    }
+
+    public function editComments(Comment $comment){
+        return view('user.comment.edit', compact('comment'));
+    }
+
+    public function updateComments(Request $request, $comment){
+        $post = $this->userPostService->updateComments($request->all(), $comment);
+        return redirect('user/view-all-comments/'.$request->postId)->with('success', 'Comment Updated Successfully');
     }
 }
