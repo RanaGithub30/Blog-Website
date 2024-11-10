@@ -23,7 +23,7 @@ Route::controller(AuthenticationManageController::class)->group(function () {
         Route::post('/login', 'login')->name('/login');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'log.activity'])->group(function () {
         Route::controller(UserManageController::class)->prefix('/user')->group(function () {
                 Route::get('dashboard', 'dashboard')->name('/user/dashboard');
         });
