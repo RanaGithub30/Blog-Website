@@ -13,4 +13,28 @@ class AdminService{
 
              return $data;
       }
+
+      public function user_list(){
+            $users = User::where('user_type', 'user')->paginate(20);
+            return $users;
+      }
+
+      public function user_delete($userId){
+            User::find($userId)->delete();
+            return true;
+      }
+
+      public function user_edit($userId){
+            $userDetails = User::find($userId);
+            return $userDetails;
+      }
+      
+      public function user_update($data, $userId){
+            User::whereId($userId)->update([
+                  'name' => $data['name'],
+                  'email' => $data['email'],
+            ]);
+
+            return true;
+      }
 }

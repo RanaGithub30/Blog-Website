@@ -21,4 +21,29 @@ class AdminManageController extends Controller
            $res = $this->adminService->dashboard();
            return view('admin.dashboard', compact('res'));
     }
+
+    public function user_list(){
+        $res = $this->adminService->user_list();
+        return view('admin.user.user-list', ['users' => $res]);
+    }
+    
+    public function user_delete($userId){
+        $res = $this->adminService->user_delete($userId);
+        return redirect()->back()->with('success', 'User Deleted Successfully');
+    }
+    
+    public function user_edit($userId){
+        $res = $this->adminService->user_edit($userId);
+        return view('admin.user.user-edit', ['user' => $res]);
+    }
+    
+    public function user_update(Request $request, $userId){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        $res = $this->adminService->user_update($request->all(), $userId);
+        return redirect()->back()->with('success', 'User Updated Successfully');
+    }
 }

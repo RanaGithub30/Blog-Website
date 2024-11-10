@@ -15,15 +15,16 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="#">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+        <a class="nav-link" href="{{ Auth::user()->user_type == 'admin' ? route('/admin/dashboard') : route('/user/dashboard') }}">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
         </a>
-      </li>
+     </li>
+    
 
       @if (Auth::user()->user_type == "admin")
       <li class="nav-item">
-        <a class="nav-link " href="#">
+        <a class="nav-link " href="{{ route('/admin/user-list') }}">
           <i class="bi bi-grid"></i>
           <span>Users</span>
         </a>

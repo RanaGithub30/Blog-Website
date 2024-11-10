@@ -24,12 +24,16 @@ Route::controller(AuthenticationManageController::class)->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-        Route::controller(UserManageController::class)->group(function () {
-                Route::get('/user/dashboard', 'dashboard')->name('/user/dashboard');
+        Route::controller(UserManageController::class)->prefix('/user')->group(function () {
+                Route::get('dashboard', 'dashboard')->name('/user/dashboard');
         });
         
-        Route::controller(AdminManageController::class)->group(function () {
-                Route::get('/admin/dashboard', 'dashboard')->name('/admin/dashboard');
+        Route::controller(AdminManageController::class)->prefix('/admin')->group(function () {
+                Route::get('dashboard', 'dashboard')->name('/admin/dashboard');
+                Route::get('user-list', 'user_list')->name('/admin/user-list');
+                Route::get('user-delete/{userId}', 'user_delete')->name('/admin/user-delete');
+                Route::get('user-edit/{userId}', 'user_edit')->name('/admin/user-edit');
+                Route::post('user-update/{userId}', 'user_update')->name('/admin/user-update');
         });
 
         Route::controller(AuthenticationManageController::class)->group(function () {
