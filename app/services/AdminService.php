@@ -15,7 +15,7 @@ class AdminService{
       }
 
       public function user_list(){
-            $users = User::where('user_type', 'user')->paginate(20);
+            $users = User::where('user_type', 'user')->orderBy('id', 'desc')->paginate(20);
             return $users;
       }
 

@@ -12,4 +12,21 @@ class Post extends Model
 
     protected $table = "posts";
     protected $guarded = [];
+
+    public function comments(){
+        return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($post) {
+            if ($post->isForceDeleting()) {
+                $post->comments()->forceDelete();
+            } else {
+                $post->comments()->delete();
+            }
+        });
+    }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Common\{AuthenticationManageController};
 use App\Http\Controllers\Admin\{AdminManageController};
-use App\Http\Controllers\User\{UserManageController};
+use App\Http\Controllers\User\{UserManageController, UserPostManageController};
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,15 @@ Route::controller(AuthenticationManageController::class)->group(function () {
 Route::middleware(['auth'])->group(function () {
         Route::controller(UserManageController::class)->prefix('/user')->group(function () {
                 Route::get('dashboard', 'dashboard')->name('/user/dashboard');
+        });
+
+        Route::controller(UserPostManageController::class)->prefix('/user')->group(function () {
+                Route::get('post', 'post')->name('/user/post');
+                Route::get('post-add', 'post_add')->name('/user/post-add');
+                Route::post('post-save', 'post_save')->name('/user/post-save');
+                Route::get('post-delete/{postId}', 'post_delete')->name('/user/post-delete');
+                Route::get('post-edit/{postId}', 'post_edit')->name('/user/post-edit');
+                Route::post('post-update/{postId}', 'post_update')->name('/user/post-update');
         });
         
         Route::controller(AdminManageController::class)->prefix('/admin')->group(function () {
